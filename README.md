@@ -1,3 +1,8 @@
+# Supported tags and respective `Dockerfile` links
+
+- [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
+- [`8.1904.0-alpine`, `8.1904-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1904.0/Dockerfile)
+
 # Rsyslog
 
 **Fastest** and **smaller** Rsyslog built for x86-64 CPU architecture.

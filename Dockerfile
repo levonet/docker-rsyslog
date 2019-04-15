@@ -2,7 +2,7 @@ FROM alpine:edge AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.1903.0
+ENV RSYSLOG_VERSION v8.1904.0
 ENV LIBLOGNORM_VERSION v2.0.6
 ENV LIBRELP_VERSION v1.3.0
 ENV LIBLOGGING_VERSION v1.0.6
@@ -99,80 +99,85 @@ RUN apk add --no-cache \
         --sysconfdir=/etc \
         --localstatedir=/var \
         --disable-debug \
-        --enable-largefile \
-        --enable-regexp \
-        --enable-fmhash \
-        --enable-inet \
-        --disable-unlimited-select \
-        --enable-mysql \
-        --enable-pgsql \
-        --enable-libdbi \
-        --disable-snmp \
-        --enable-uuid \
-        --enable-elasticsearch \
-        --enable-clickhouse \
-        --enable-omhttp \
-        --enable-openssl \
-        --enable-gnutls \
-        --enable-libgcrypt \
-        --enable-rsyslogrt \
-        --enable-rsyslogd \
-        --enable-mail \
-        --enable-fmhttp \
-        --enable-imdiag \
-        --enable-mmnormalize \
-        --enable-mmjsonparse \
-        --enable-mmgrok \
-        --enable-mmaudit \
-        --enable-mmanon \
-        --enable-mmrm1stspace \
-        --enable-mmutf8fix \
-        --enable-mmcount \
-        --enable-mmsequence \
-        --enable-mmdblookup \
-        --enable-mmfields \
-        --enable-mmpstrucdata \
-        --enable-mmrfc5424addhmac \
-        --enable-omfile-hardened \
-        --enable-relp \
+        --disable-generate-man-pages \
+        --disable-imczmq \
+        --disable-imsolaris \
         --disable-ksi-ls12 \
         --disable-liblogging-stdlog \
-        --enable-rfc3195 \
-        --enable-testbench \
-        --enable-libfaketime \
-        --enable-imfile \
-        --disable-imsolaris \
-        --enable-imptcp \
-        --enable-impstats \
-        --enable-omprog \
-        --disable-omudpspoof \
-        --enable-omstdout \
-        --disable-omjournal \
-        --disable-pmlastmsg \
-        --enable-pmcisconames \
-        --enable-pmciscoios \
-        --enable-pmnull \
-        --enable-pmnormalize \
-        --enable-pmaixforwardedfrom \
-        --enable-pmsnare \
-        --enable-pmpanngfw \
-        --enable-omruleset \
-        --enable-omuxsock \
         --disable-mmsnmptrapd \
-        --disable-omhdfs \
-        --enable-omkafka \
-        --enable-imkafka \
-        --disable-ommongodb \
-        --disable-imczmq \
-        --disable-omczmq \
-        --disable-omrabbitmq \
-        --disable-omhiredis \
-        --enable-omhttpfs \
         --disable-omamqp1 \
+        --disable-omczmq \
+        --disable-omhdfs \
+        --disable-omhiredis \
+        --disable-omjournal \
+        --disable-ommongodb \
+        --disable-omrabbitmq \
         --disable-omtcl \
-        --enable-mmkubernetes \
-        --disable-generate-man-pages \
+        --disable-omudpspoof \
+        --disable-pmlastmsg \
+        --disable-snmp \
+        --disable-unlimited-select \
+        --enable-clickhouse \
         --enable-distcheck-workaround \
+        --enable-elasticsearch \
+        --enable-fmhash \
+        --enable-fmhttp \
+        --enable-gnutls \
+        --enable-imbatchreport \
+        --enable-imdiag \
+        --enable-imdocker \
+        --enable-imfile \
+        --enable-imkafka \
+        --enable-impstats \
+        --enable-imptcp \
+        --enable-imtuxedoulog \
+        --enable-inet \
+        --enable-largefile \
+        --enable-libdbi \
+        --enable-libfaketime \
+        --enable-libgcrypt \
+        --enable-mail \
+        --enable-mmanon \
+        --enable-mmaudit \
+        --enable-mmcount \
+        --enable-mmdblookup \
+        --enable-mmfields \
+        --enable-mmgrok \
+        --enable-mmjsonparse \
+        --enable-mmkubernetes \
+        --enable-mmnormalize \
+        --enable-mmpstrucdata \
+        --enable-mmrfc5424addhmac \
+        --enable-mmrm1stspace \
+        --enable-mmsequence \
+        --enable-mmtaghostname \
+        --enable-mmutf8fix \
+        --enable-mysql \
+        --enable-omfile-hardened \
+        --enable-omhttp \
+        --enable-omhttpfs \
+        --enable-omkafka \
+        --enable-omprog \
+        --enable-omruleset \
+        --enable-omstdout \
+        --enable-omuxsock \
+        --enable-openssl \
+        --enable-pgsql \
+        --enable-pmaixforwardedfrom \
+        --enable-pmciscoios \
+        --enable-pmcisconames \
+        --enable-pmdb2diag \
+        --enable-pmnormalize \
+        --enable-pmnull \
+        --enable-pmpanngfw \
+        --enable-pmsnare \
+        --enable-regexp \
+        --enable-relp \
+        --enable-rfc3195 \
+        --enable-rsyslogd \
+        --enable-rsyslogrt \
+        --enable-testbench \
+        --enable-uuid \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
     && strip /usr/local/bin/* \
