@@ -7,76 +7,94 @@
 
 **Fastest** and **smaller** Rsyslog built for x86-64 CPU architecture.
 
-This source is used to build an image for rsyslog. The image contains:
+This source is used to build an image for rsyslog.
 
-- Input Modules:
-  - imbatchreport
-  - imdiag
-  - imdocker
-  - imfile
-  - imkafka
-  - impstats
-  - imptcp
-  - imtuxedoulog
-  - relp
-  - rfc3195
-  - tcp
-  - udp
-- Parser Modules:
-  - pmaixforwardedfrom
-  - pmciscoios
-  - pmcisconames
-  - pmdb2diag
-  - pmnormalize
-  - pmnull
-  - pmpanngfw
-  - pmsnare
-- Message Modification:
-  - mmanon
-  - mmaudit
-  - mmcount
-  - mmdblookup
-  - mmfields
-  - mmgrok
-  - mmjsonparse
-  - mmkubernetes
-  - mmnormalize
-  - mmpstrucdata
-  - mmrfc5424addhmac
-  - mmrm1stspace
-  - mmsequence
-  - mmtaghostname
-  - mmutf8fix
-- Output Modules:
-  - omclickhouse
-  - omelasticsearch
-  - largefile
-  - libdbi
-  - mail
-  - mysql
-  - omfile
-  - omfile-hardened
-  - omhttp
-  - omhttpfs
-  - omkafka
-  - omprog
-  - omruleset
-  - omstdout
-  - omuxsock
-  - pgsql
-  - relp
-- Functions:
-  - fmhash
-  - fmhttp
-- Other:
-  - gnutls
-  - inet
-  - libfaketime
-  - libgcrypt
-  - openssl
-  - regexp
-  - testbench
-  - uuid
+## Modules
+
+Rsyslog has a modular design. This enables functionality to be dynamically loaded from modules, which may also be written by any third party.
+The image contains:
+
+<table>
+  <tr>
+    <th>Output</th><th>Input</th><th>Parser</th><th>Message Modification</th><th>Functions</th><th>Library</th>
+  </tr>
+  <tr>
+    <td>
+      omclickhouse<br/>
+      omelasticsearch<br/>
+      omfile-hardened<br/>
+      omhttp<br/>
+      omhttpfs<br/>
+      omkafka<br/>
+      omlibdbi<br/>
+      ommail<br/>
+      ommysql<br/>
+      ompgsql<br/>
+      omprog<br/>
+      omrelp<br/>
+      omruleset<br/>
+      omstdout<br/>
+      omtesting<br/>
+      omuxsock
+    </td><td>
+      im3195<br/>
+      imbatchreport<br/>
+      imdiag<br/>
+      imdocker<br/>
+      imfile<br/>
+      imkafka<br/>
+      imklog<br/>
+      immark<br/>
+      impstats<br/>
+      imptcp<br/>
+      imrelp<br/>
+      imtcp<br/>
+      imtuxedoulog<br/>
+      imudp<br/>
+      imuxsock
+    </td><td>
+      pmaixforwardedfrom<br/>
+      pmciscoios<br/>
+      pmcisconames<br/>
+      pmdb2diag<br/>
+      pmnormalize<br/>
+      pmnull<br/>
+      pmpanngfw<br/>
+      pmsnare
+    </td><td>
+      mmanon<br/>
+      mmaudit<br/>
+      mmcount<br/>
+      mmdblookup<br/>
+      mmexternal<br/>
+      mmfields<br/>
+      mmgrok<br/>
+      mmjsonparse<br/>
+      mmkubernetes<br/>
+      mmnormalize<br/>
+      mmpstrucdata<br/>
+      mmrfc5424addhmac<br/>
+      mmrm1stspace<br/>
+      mmsequence<br/>
+      mmtaghostname<br/>
+      mmutf8fix
+    </td><td>
+      fmhash<br/>
+      fmhttp
+    </td><td>
+      lmcry_gcry<br/>
+      lmnet<br/>
+      lmnetstrms<br/>
+      lmnsd_gtls<br/>
+      lmnsd_ossl<br/>
+      lmnsd_ptcp<br/>
+      lmregexp<br/>
+      lmtcpclt<br/>
+      lmtcpsrv<br/>
+      lmzlibw
+    </td>
+  </tr>
+</table>
 
 ## How to use this image
 
