@@ -90,6 +90,7 @@ RUN apk add --no-cache \
     && patch -p0 < /tmp/grok-re-buf-overflow-fix.diff \
     && PREFIX=/usr/local LDFLAGS=-lportablexdr make -j$(getconf _NPROCESSORS_ONLN) \
     && PREFIX=/usr/local make install \
+    && ln -s /usr/local/lib/libgrok.so /usr/local/lib/libgrok.so.1 \
     #
     && git clone -b ${RSYSLOG_VERSION} --single-branch --depth 1 https://github.com/rsyslog/rsyslog.git /usr/src/rsyslog \
     && cd /usr/src/rsyslog \
@@ -183,6 +184,7 @@ RUN apk add --no-cache \
     && strip /usr/local/bin/* \
     && strip /usr/local/sbin/rsyslogd \
     && strip /usr/local/lib/*.so.*.*.* \
+    && strip /usr/local/lib/libgrok.so \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -r /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la
 
@@ -191,6 +193,7 @@ FROM alpine:edge
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
 COPY --from=build /usr/local/lib /usr/local/lib
+COPY --from=build /usr/local/share/grok /usr/local/share/grok
 
 RUN apk add --no-cache \
         musl \
@@ -215,11 +218,11 @@ RUN apk add --no-cache \
         glib \
     && mkdir -p /etc/rsyslog.d
 
-COPY rsyslogd.conf /etc/rsyslogd.conf
+COPY rsyslog.conf /etc/rsyslog.conf
 
 ENV TZ=UTC
 EXPOSE 514/tcp
 EXPOSE 514/udp
 STOPSIGNAL SIGTERM
 
-ENTRYPOINT ["/usr/local/sbin/rsyslogd", "-n", "-f", "/etc/rsyslogd.conf"]
+ENTRYPOINT ["/usr/local/sbin/rsyslogd", "-n", "-f", "/etc/rsyslog.conf"]
