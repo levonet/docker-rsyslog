@@ -84,13 +84,13 @@ RUN apk add --no-cache \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
     #
-    && git clone --depth=1 https://github.com/jordansissel/grok.git /usr/src/libgrok \
+    && git clone --depth=1 https://github.com/bitbouncer/grok.git /usr/src/libgrok \
     && cd /usr/src/libgrok \
-    && patch -p0 < /tmp/grok-gperf3.1.diff \
     && patch -p0 < /tmp/grok-re-buf-overflow-fix.diff \
-    && PREFIX=/usr/local LDFLAGS=-lportablexdr make -j$(getconf _NPROCESSORS_ONLN) \
-    && PREFIX=/usr/local make install \
-    && ln -s /usr/local/lib/libgrok.so /usr/local/lib/libgrok.so.1 \
+    && patch -p0 < /tmp/grok-ipv6.diff \
+    && patch -p0 < /tmp/grok-log-levels.diff \
+    && LDFLAGS=-lportablexdr make -j$(getconf _NPROCESSORS_ONLN) \
+    && make install \
     #
     && git clone -b ${RSYSLOG_VERSION} --single-branch --depth 1 https://github.com/rsyslog/rsyslog.git /usr/src/rsyslog \
     && cd /usr/src/rsyslog \
