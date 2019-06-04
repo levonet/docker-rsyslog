@@ -89,6 +89,7 @@ RUN apk add --no-cache \
     && patch -p0 < /tmp/grok-re-buf-overflow-fix.diff \
     && patch -p0 < /tmp/grok-ipv6.diff \
     && patch -p0 < /tmp/grok-log-levels.diff \
+    && patch -p1 < /tmp/grok-missing-semicolon-in-grammar-file.diff \
     && LDFLAGS=-lportablexdr make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
     #

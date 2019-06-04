@@ -1,0 +1,42 @@
+diff --git a/conf.y b/conf.y
+index 301d3d8..8e23445 100644
+--- a/conf.y
++++ b/conf.y
+@@ -1,9 +1,12 @@
++%code requires{
++#include "grok_config.h"
++}
++
+ %{ 
+ #include <stdio.h>
+ #include <string.h>
+ 
+ #include "conf.tab.h"
+-#include "grok_config.h"
+ #include "grok_input.h"
+ #include "grok_matchconf.h"
+ 
+@@ -128,7 +131,7 @@ match_block: match_block match_block_statement
+            | match_block_statement
+ 
+ match_block_statement: /* empty */
+-           | "pattern" ':' QUOTEDSTRING { conf_new_match_pattern(conf, $3) }
++           | "pattern" ':' QUOTEDSTRING { conf_new_match_pattern(conf, $3); }
+            | "reaction" ':' QUOTEDSTRING { CURMATCH.reaction = $3; }
+            | "reaction" ':' "none" { CURMATCH.no_reaction = 1; }
+            | "shell" ':' QUOTEDSTRING { CURMATCH.shell = $3; }
+diff --git a/grok_config.h b/grok_config.h
+index 0eca357..dcfe44b 100644
+--- a/grok_config.h
++++ b/grok_config.h
+@@ -1,3 +1,5 @@
++#ifndef GROK_CONFIG_H
++#define GROK_CONFIG_H
+ #include "grok_program.h"
+ 
+ #define CURPROGRAM (conf->programs[conf->nprograms - 1])
+@@ -27,3 +29,4 @@ void conf_new_input_file(struct config *conf, char *filename);
+ void conf_new_matchconf(struct config *conf);
+ void conf_new_match_pattern(struct config *conf, const char *pattern);
+ void conf_match_set_debug(struct config *conf, int logmask);
++#endif
