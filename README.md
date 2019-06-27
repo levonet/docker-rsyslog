@@ -1,5 +1,4 @@
 # Supported tags and respective `Dockerfile` links
-[![Docker Pulls](https://img.shields.io/docker/pulls/levonet/rsyslog.svg)](https://hub.docker.com/r/levonet/rsyslog/)
 
 - [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
 - [`8.1905.1-alpine`, `8.1905-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1905.1/Dockerfile)
@@ -8,6 +7,7 @@
 
 [![](https://images.microbadger.com/badges/version/levonet/rsyslog.svg)](https://microbadger.com/images/levonet/rsyslog "Get your own version badge on microbadger.com")
 [![](https://images.microbadger.com/badges/image/levonet/rsyslog.svg)](https://microbadger.com/images/levonet/rsyslog "Get your own image badge on microbadger.com")
+[![Docker Pulls](https://img.shields.io/docker/pulls/levonet/rsyslog.svg)](https://hub.docker.com/r/levonet/rsyslog/)
 
 **Fastest** and **smaller** Rsyslog built for x86-64 CPU architecture.
 
