@@ -3,44 +3,61 @@ FROM alpine:edge AS build
 COPY grok-*.diff /tmp/
 
 ENV RSYSLOG_VERSION v8.1905.0
+ENV LIBMONGOC_VERSION 1.14.0
 ENV LIBLOGNORM_VERSION v2.0.6
-ENV LIBRELP_VERSION v1.3.0
+ENV LIBRELP_VERSION v1.4.0
 ENV LIBLOGGING_VERSION v1.0.6
 ENV TOKYO_CABINET_VERSION 1.4.30
 ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-loops -fstack-protector-strong -ffast-math -fomit-frame-pointer -Wformat -Werror=format-security"
 
 RUN apk add --no-cache \
-        git \
         autoconf \
         automake \
-        libtool \
-        build-base \
-        flex \
         bison \
-        rpcgen \
-        gperf \
-        py-docutils \
-        gnutls-dev \
-        zlib-dev \
-        pcre-dev \
-        curl-dev \
-        mysql-dev \
-        postgresql-dev \
-        libdbi-dev \
-        libuuid \
-        util-linux-dev \
-        libgcrypt-dev \
         bsd-compat-headers \
-        linux-headers \
-        librdkafka-dev \
+        build-base \
+        bzip2-dev \
+        cmake \
+        curl-dev \
+        flex \
+        git \
+        glib-dev \
+        gnutls-dev \
+        gperf \
+        libdbi-dev \
         libestr-dev \
+        libevent-dev \
         libfastjson-dev \
+        libgcrypt-dev \
         liblogging-dev \
         libmaxminddb-dev \
-        bzip2-dev \
+        librdkafka-dev \
+        libtool \
+        libuuid \
+        linux-headers \
+        mysql-dev \
+        pcre-dev \
         portablexdr-dev \
-        libevent-dev \
-        glib-dev \
+        postgresql-dev \
+        py-docutils \
+        rpcgen \
+        util-linux-dev \
+        zlib-dev \
+    && git clone -b ${LIBMONGOC_VERSION} --single-branch --depth 1 https://github.com/mongodb/mongo-c-driver.git /usr/src/mongo-c-driver \
+    && echo "${LIBMONGOC_VERSION}" > /usr/src/mongo-c-driver/VERSION_CURRENT \
+    && mkdir /usr/src/mongo-c-driver/cmake-build \
+    && cd /usr/src/mongo-c-driver/cmake-build \
+    && cmake \
+        -DENABLE_AUTOMATIC_INIT_AND_CLEANUP=OFF \
+        -DCMAKE_INSTALL_LIBDIR=/usr/local/lib \
+        -DCMAKE_C_FLAGS="-pipe -m64 -Ofast -fPIE -fPIC -fomit-frame-pointer -Wformat -Werror=format-security" \
+        -DCMAKE_BUILD_TYPE=Release \
+        -DENABLE_STATIC=OFF \
+        -DENABLE_TESTS=OFF \
+        .. \
+    && make \
+    && make install \
+    #
     && git clone -b ${LIBLOGNORM_VERSION} --single-branch --depth 1 https://github.com/rsyslog/liblognorm.git /usr/src/liblognorm \
     && cd /usr/src/liblognorm \
     && autoreconf --force --verbose --install \
@@ -112,7 +129,6 @@ RUN apk add --no-cache \
         --disable-omhdfs \
         --disable-omhiredis \
         --disable-omjournal \
-        --disable-ommongodb \
         --disable-omrabbitmq \
         --disable-omtcl \
         --disable-omudpspoof \
@@ -159,6 +175,7 @@ RUN apk add --no-cache \
         --enable-omhttp \
         --enable-omhttpfs \
         --enable-omkafka \
+        --enable-ommongodb \
         --enable-omprog \
         --enable-omruleset \
         --enable-omstdout \
@@ -187,7 +204,7 @@ RUN apk add --no-cache \
     && strip /usr/local/lib/*.so.*.*.* \
     && strip /usr/local/lib/libgrok.so \
     && strip /usr/local/lib/rsyslog/*.so \
-    && rm -r /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la
+    && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
 FROM alpine:edge
 
@@ -197,26 +214,26 @@ COPY --from=build /usr/local/lib /usr/local/lib
 COPY --from=build /usr/local/share/grok /usr/local/share/grok
 
 RUN apk add --no-cache \
-        musl \
+        glib \
+        gnutls \
+        libbz2 \
         libcrypto1.1 \
         libcurl \
         libdbi \
         libestr \
+        libevent \
         libfastjson \
         libgcrypt \
-        gnutls \
-        mariadb-connector-c \
         libmaxminddb \
-        pcre \
         libpq \
         librdkafka \
         libssl1.1 \
         libuuid \
-        zlib \
-        libbz2 \
-        libevent \
+        mariadb-connector-c \
+        musl \
+        pcre \
         portablexdr \
-        glib \
+        zlib \
     && mkdir -p /etc/rsyslog.d
 
 COPY rsyslog.conf /etc/rsyslog.conf

@@ -30,6 +30,7 @@ The image contains:
       omhttp<br/>
       omhttpfs<br/>
       omkafka<br/>
+      ommongodb<br/>
       omlibdbi<br/>
       ommail<br/>
       ommysql<br/>
