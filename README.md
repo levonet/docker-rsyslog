@@ -1,7 +1,12 @@
 # Supported tags and respective `Dockerfile` links
 
 - [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
+- [`8.1908.0-alpine`, `8.1908-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1908.0/Dockerfile)
 - [`8.1907.0-alpine`, `8.1907-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1907.0/Dockerfile)
+- [`8.1905.1-alpine`, `8.1905-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1905.1/Dockerfile)
+- [`8.1904.1-alpine`, `8.1904-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1904.1/Dockerfile)
+- [`8.1903.0-alpine`, `8.1903-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1903.0/Dockerfile)
+- [`8.1901.0-alpine`, `8.1901-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1901.0/Dockerfile)
 
 # Rsyslog
 
@@ -70,6 +75,7 @@ The image contains:
       mmanon<br/>
       mmaudit<br/>
       mmcount<br/>
+      mmdarwin<br/>
       mmdblookup<br/>
       mmexternal<br/>
       mmfields<br/>

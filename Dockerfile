@@ -2,8 +2,8 @@ FROM alpine:edge AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.1907.0
-ENV LIBMONGOC_VERSION 1.14.0
+ENV RSYSLOG_VERSION v8.1908.0
+ENV LIBMONGOC_VERSION 1.15.0
 ENV LIBLOGNORM_VERSION v2.0.6
 ENV LIBRELP_VERSION v1.4.0
 ENV LIBLOGGING_VERSION v1.0.6
@@ -158,6 +158,7 @@ RUN apk add --no-cache \
         --enable-mmanon \
         --enable-mmaudit \
         --enable-mmcount \
+        --enable-mmdarwin \
         --enable-mmdblookup \
         --enable-mmfields \
         --enable-mmgrok \
