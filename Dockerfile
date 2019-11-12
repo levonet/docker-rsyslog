@@ -1,9 +1,9 @@
-FROM alpine:edge AS build
+FROM alpine:3.10 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.1910.0
-ENV LIBMONGOC_VERSION 1.15.1
+ENV RSYSLOG_VERSION v8.1911.0
+ENV LIBMONGOC_VERSION 1.15.2
 ENV LIBLOGNORM_VERSION v2.0.6
 ENV LIBRELP_VERSION v1.4.0
 ENV LIBLOGGING_VERSION v1.0.6
@@ -207,7 +207,7 @@ RUN apk add --no-cache \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
-FROM alpine:edge
+FROM alpine:3.10
 
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
