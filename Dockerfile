@@ -1,11 +1,11 @@
-FROM alpine:3.10 AS build
+FROM alpine:3.11 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2002.0
+ENV RSYSLOG_VERSION v8.2004.0
 ENV LIBMONGOC_VERSION 1.16.2
 ENV LIBLOGNORM_VERSION v2.0.6
-ENV LIBRELP_VERSION v1.4.0
+ENV LIBRELP_VERSION v1.6.0
 ENV LIBLOGGING_VERSION v1.0.6
 ENV TOKYO_CABINET_VERSION 1.4.30
 ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-loops -fstack-protector-strong -ffast-math -fomit-frame-pointer -Wformat -Werror=format-security"
@@ -207,7 +207,7 @@ RUN apk add --no-cache \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
-FROM alpine:3.10
+FROM alpine:3.11
 
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
