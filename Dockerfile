@@ -2,11 +2,16 @@ FROM alpine:3.11 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2004.0
+ENV RSYSLOG_VERSION v8.2006.0
+# https://github.com/mongodb/mongo-c-driver
 ENV LIBMONGOC_VERSION 1.16.2
+# https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
+# https://github.com/rsyslog/librelp
 ENV LIBRELP_VERSION v1.6.0
+# https://github.com/rsyslog/liblogging
 ENV LIBLOGGING_VERSION v1.0.6
+# https://github.com/clement/tokyo-cabinet
 ENV TOKYO_CABINET_VERSION 1.4.30
 ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-loops -fstack-protector-strong -ffast-math -fomit-frame-pointer -Wformat -Werror=format-security"
 
@@ -24,6 +29,7 @@ RUN apk add --no-cache \
         glib-dev \
         gnutls-dev \
         gperf \
+        hiredis-dev \
         libdbi-dev \
         libestr-dev \
         libevent-dev \
@@ -31,6 +37,7 @@ RUN apk add --no-cache \
         libgcrypt-dev \
         liblogging-dev \
         libmaxminddb-dev \
+        libpcap-dev \
         librdkafka-dev \
         libtool \
         libuuid \
@@ -127,12 +134,10 @@ RUN apk add --no-cache \
         --disable-omamqp1 \
         --disable-omczmq \
         --disable-omhdfs \
-        --disable-omhiredis \
         --disable-omjournal \
         --disable-omrabbitmq \
         --disable-omtcl \
         --disable-omudpspoof \
-        --disable-pmlastmsg \
         --disable-snmp \
         --disable-unlimited-select \
         --enable-clickhouse \
@@ -145,7 +150,9 @@ RUN apk add --no-cache \
         --enable-imdiag \
         --enable-imdocker \
         --enable-imfile \
+        --enable-imgssapi \
         --enable-imkafka \
+        --enable-impcap \
         --enable-impstats \
         --enable-imptcp \
         --enable-imtuxedoulog \
@@ -173,6 +180,8 @@ RUN apk add --no-cache \
         --enable-mmutf8fix \
         --enable-mysql \
         --enable-omfile-hardened \
+        --enable-omgssapi \
+        --enable-omhiredis \
         --enable-omhttp \
         --enable-omhttpfs \
         --enable-omkafka \
@@ -187,6 +196,7 @@ RUN apk add --no-cache \
         --enable-pmciscoios \
         --enable-pmcisconames \
         --enable-pmdb2diag \
+        --enable-pmlastmsg \
         --enable-pmnormalize \
         --enable-pmnull \
         --enable-pmpanngfw \
@@ -217,6 +227,7 @@ COPY --from=build /usr/local/share/grok /usr/local/share/grok
 RUN apk add --no-cache \
         glib \
         gnutls \
+        hiredis \
         libbz2 \
         libcrypto1.1 \
         libcurl \
@@ -226,6 +237,7 @@ RUN apk add --no-cache \
         libfastjson \
         libgcrypt \
         libmaxminddb \
+        libpcap \
         libpq \
         librdkafka \
         libssl1.1 \

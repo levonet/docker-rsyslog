@@ -1,9 +1,10 @@
 # Supported tags and respective `Dockerfile` links
 
 - [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
-- [`8.2004.0-alpine`, `8.2004-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2004.0/Dockerfile)
+- [`8.2006.0-alpine`, `8.2006-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2006.0/Dockerfile)
 - <details><summary>Older versions</summary>
 
+  - [`8.2004.0-alpine`, `8.2004-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2004.0/Dockerfile)
   - [`8.2002.0-alpine`, `8.2002-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2002.0/Dockerfile)
   - [`8.2001.0-alpine`, `8.2001-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2001.0/Dockerfile)
   - [`8.1911.0-alpine`, `8.1911-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.1911.0/Dockerfile)
@@ -40,12 +41,14 @@ The image contains:
       omclickhouse<br/>
       omelasticsearch<br/>
       omfile-hardened<br/>
+      omgssapi<br/>
+      omhiredis<br/>
       omhttp<br/>
       omhttpfs<br/>
       omkafka<br/>
-      ommongodb<br/>
       omlibdbi<br/>
       ommail<br/>
+      ommongodb<br/>
       ommysql<br/>
       ompgsql<br/>
       omprog<br/>
@@ -60,9 +63,11 @@ The image contains:
       imdiag<br/>
       imdocker<br/>
       imfile<br/>
+      imgssapi<br/>
       imkafka<br/>
       imklog<br/>
       immark<br/>
+      impcap<br/>
       impstats<br/>
       imptcp<br/>
       imrelp<br/>
@@ -75,6 +80,7 @@ The image contains:
       pmciscoios<br/>
       pmcisconames<br/>
       pmdb2diag<br/>
+      pmlastmsg<br/>
       pmnormalize<br/>
       pmnull<br/>
       pmpanngfw<br/>
