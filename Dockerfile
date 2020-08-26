@@ -1,14 +1,14 @@
-FROM alpine:3.11 AS build
+FROM alpine:3.12 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2006.0
+ENV RSYSLOG_VERSION v8.2008.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.16.2
+ENV LIBMONGOC_VERSION 1.17.0
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
-ENV LIBRELP_VERSION v1.6.0
+ENV LIBRELP_VERSION v1.7.0
 # https://github.com/rsyslog/liblogging
 ENV LIBLOGGING_VERSION v1.0.6
 # https://github.com/clement/tokyo-cabinet
@@ -217,7 +217,7 @@ RUN apk add --no-cache \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
-FROM alpine:3.11
+FROM alpine:3.12
 
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
