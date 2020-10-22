@@ -2,20 +2,21 @@ FROM alpine:3.12 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2008.0
+ENV RSYSLOG_VERSION v8.2010.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.17.0
+ENV LIBMONGOC_VERSION 1.17.1
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
-ENV LIBRELP_VERSION v1.7.0
+ENV LIBRELP_VERSION v1.8.0
 # https://github.com/rsyslog/liblogging
 ENV LIBLOGGING_VERSION v1.0.6
 # https://github.com/clement/tokyo-cabinet
 ENV TOKYO_CABINET_VERSION 1.4.30
 ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-loops -fstack-protector-strong -ffast-math -fomit-frame-pointer -Wformat -Werror=format-security"
 
-RUN apk add --no-cache \
+RUN set -eux \
+    && apk add --no-cache \
         autoconf \
         automake \
         bison \
@@ -151,6 +152,7 @@ RUN apk add --no-cache \
         --enable-imdocker \
         --enable-imfile \
         --enable-imgssapi \
+        # --enable-imhttp \ # need https://github.com/civetweb/civetweb
         --enable-imkafka \
         --enable-impcap \
         --enable-impstats \
@@ -224,7 +226,8 @@ COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
 COPY --from=build /usr/local/lib /usr/local/lib
 COPY --from=build /usr/local/share/grok /usr/local/share/grok
 
-RUN apk add --no-cache \
+RUN set -eux \
+    && apk add --no-cache \
         glib \
         gnutls \
         hiredis \
