@@ -69,7 +69,8 @@ The image contains:
       imdocker<br/>
       imfile<br/>
       imgssapi<br/>
-      <!-- imhttp<br/> -->
+      imhiredis<br/>
+      imhttp<br/>
       imkafka<br/>
       imklog<br/>
       immark<br/>
