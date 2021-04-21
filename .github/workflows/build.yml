@@ -16,4 +16,4 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Build the Docker image
-      run: docker build -t levonet/nginx:${DOCKER_TAG} .
+      run: docker build -t levonet/rsyslog:${DOCKER_TAG} .
