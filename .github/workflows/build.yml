@@ -1,0 +1,21 @@
+---
+name: build
+
+on:
+  push:
+    branches:
+    - master
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    env:
+      DOCKER_TAG: ${{ github.sha }}
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build the Docker image
+      run: docker build -t levonet/nginx:${DOCKER_TAG} .
+    - name: Scan the Docker image
+      run: docker scan --accept-license levonet/nginx:${DOCKER_TAG}
