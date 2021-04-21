@@ -2,9 +2,9 @@ FROM alpine:3.12 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2102.0
+ENV RSYSLOG_VERSION v8.2104.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.17.4
+ENV LIBMONGOC_VERSION 1.17.5
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
@@ -152,6 +152,7 @@ RUN set -eux \
         --enable-imdocker \
         --enable-imfile \
         --enable-imgssapi \
+        --enable-imhiredis \
         # --enable-imhttp \ # need https://github.com/civetweb/civetweb
         --enable-imkafka \
         --enable-impcap \
