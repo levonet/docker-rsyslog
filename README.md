@@ -1,9 +1,10 @@
 # Supported tags and respective `Dockerfile` links
 
 - [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
-- [`8.2104.0-alpine`, `8.2104-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2104.0/Dockerfile)
+- [`8.2106.0-alpine`, `8.2106-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2106.0/Dockerfile)
 - <details><summary>Older versions</summary>
 
+  - [`8.2104.0-alpine`, `8.2104-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2104.0/Dockerfile)
   - [`8.2102.0-alpine`, `8.2102-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2102.0/Dockerfile)
   - [`8.2012.0-alpine`, `8.2012-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2012.0/Dockerfile)
   - [`8.2010.0-alpine`, `8.2010-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2010.0/Dockerfile)
@@ -24,8 +25,7 @@
 
 # Rsyslog
 
-[![](https://images.microbadger.com/badges/version/levonet/rsyslog.svg)](https://microbadger.com/images/levonet/rsyslog "Get your own version badge on microbadger.com")
-[![](https://images.microbadger.com/badges/image/levonet/rsyslog.svg)](https://microbadger.com/images/levonet/rsyslog "Get your own image badge on microbadger.com")
+[![build](https://github.com/levonet/docker-rsyslog/actions/workflows/build.yml/badge.svg)](https://github.com/levonet/docker-rsyslog/actions/workflows/build.yml)
 [![Docker Pulls](https://img.shields.io/docker/pulls/levonet/rsyslog.svg)](https://hub.docker.com/r/levonet/rsyslog/)
 
 **Fastest** and **smaller** Rsyslog built for x86-64 CPU architecture.
