@@ -5,15 +5,35 @@ on:
   push:
     branches:
     - master
+    tags:
+    - v*
   pull_request:
 
 jobs:
   build:
     runs-on: ubuntu-latest
-    env:
-      DOCKER_TAG: ${{ github.sha }}
     steps:
+
     - name: Checkout
       uses: actions/checkout@v2
-    - name: Build the Docker image
-      run: docker build -t levonet/rsyslog:${DOCKER_TAG} .
+
+    - name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: levonet/rsyslog
+
+    - name: Login to DockerHub
+      if: ${{ github.event_name != 'pull_request' }}
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+    - name: Build and push
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
