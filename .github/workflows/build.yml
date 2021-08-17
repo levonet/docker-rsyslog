@@ -22,6 +22,14 @@ jobs:
       uses: docker/metadata-action@v3
       with:
         images: levonet/rsyslog
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+        flavor: |
+          latest=auto
+          suffix=alpine,onlatest=false
 
     - name: Login to DockerHub
       if: ${{ github.event_name != 'pull_request' }}
