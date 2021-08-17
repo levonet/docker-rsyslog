@@ -29,7 +29,7 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
         flavor: |
           latest=auto
-          suffix=alpine,onlatest=false
+          suffix=-alpine,onlatest=false
 
     - name: Login to DockerHub
       if: ${{ github.event_name != 'pull_request' }}
