@@ -2,9 +2,9 @@ FROM alpine:3.12 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2108.0
+ENV RSYSLOG_VERSION v8.2110.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.19.0
+ENV LIBMONGOC_VERSION 1.19.1
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
@@ -12,13 +12,14 @@ ENV LIBRELP_VERSION v1.10.0
 # https://github.com/rsyslog/liblogging
 ENV LIBLOGGING_VERSION v1.0.6
 # https://github.com/civetweb/civetweb
-ENV CIVETWEB_VERSION v1.14
+ENV CIVETWEB_VERSION v1.15
 # https://github.com/clement/tokyo-cabinet
 ENV TOKYO_CABINET_VERSION 1.4.30
 ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-loops -fstack-protector-strong -ffast-math -fomit-frame-pointer -Wformat -Werror=format-security"
 
 RUN set -eux \
     && apk add --no-cache \
+        apr-util-dev \
         autoconf \
         automake \
         bison \
