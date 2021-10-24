@@ -19,6 +19,7 @@ ENV CFLAGS "-pipe -m64 -Ofast -mtune=generic -march=x86-64 -fPIE -fPIC -funroll-
 
 RUN set -eux \
     && apk add --no-cache \
+        apr-util-dev \
         autoconf \
         automake \
         bison \
