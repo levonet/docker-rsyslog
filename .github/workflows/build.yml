@@ -50,7 +50,7 @@ jobs:
 
     - name: Docker Hub Description
       if: ${{ github.event_name != 'pull_request' }}
-      uses: peter-evans/dockerhub-description@v2
+      uses: peter-evans/dockerhub-description@v3
       with:
         username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
