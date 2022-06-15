@@ -1,8 +1,8 @@
 diff --git a/conf.y b/conf.y
-index 301d3d8..8e23445 100644
+index 301d3d8..371a8fe 100644
 --- a/conf.y
 +++ b/conf.y
-@@ -1,9 +1,12 @@
+@@ -1,13 +1,15 @@
 +%code requires{
 +#include "grok_config.h"
 +}
@@ -16,7 +16,11 @@ index 301d3d8..8e23445 100644
  #include "grok_input.h"
  #include "grok_matchconf.h"
  
-@@ -128,7 +131,7 @@ match_block: match_block match_block_statement
+-int yylineno;
+ void yyerror (YYLTYPE *loc, struct config *conf, char const *s) {
+   fprintf (stderr, "Syntax error: %s\n", s);
+ }
+@@ -128,7 +130,7 @@ match_block: match_block match_block_statement
             | match_block_statement
  
  match_block_statement: /* empty */

@@ -1,9 +1,10 @@
 # Supported tags and respective `Dockerfile` links
 
 - [`latest` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/master/Dockerfile)
-- [`8.2112.0-alpine`, `8.2112-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2112.0/Dockerfile)
+- [`8.2206.0-alpine`, `8.2206-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2206.0/Dockerfile)
 - <details><summary>Older versions</summary>
 
+  - [`8.2112.0-alpine`, `8.2112-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2112.0/Dockerfile)
   - [`8.2110.0-alpine`, `8.2110-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2110.0/Dockerfile)
   - [`8.2108.0-alpine`, `8.2108-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2108.0/Dockerfile)
   - [`8.2106.0-alpine`, `8.2106-alpine` (*Dockerfile*)](https://github.com/levonet/docker-rsyslog/blob/v8.2106.0/Dockerfile)

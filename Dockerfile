@@ -1,10 +1,10 @@
-FROM alpine:3.12 AS build
+FROM alpine:3.15 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2112.0
+ENV RSYSLOG_VERSION v8.2206.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.20.0
+ENV LIBMONGOC_VERSION 1.21.2
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
@@ -49,9 +49,9 @@ RUN set -eux \
         mysql-dev \
         pcre-dev \
         portablexdr-dev \
+        portablexdr-rpcgen \
         postgresql-dev \
         py-docutils \
-        rpcgen \
         util-linux-dev \
         zlib-dev \
     && git clone -b ${LIBMONGOC_VERSION} --single-branch --depth 1 https://github.com/mongodb/mongo-c-driver.git /usr/src/mongo-c-driver \
@@ -112,14 +112,14 @@ RUN set -eux \
     && make -j$(getconf _NPROCESSORS_ONLN) \
     && make install \
     #
-    && git clone --depth=1 https://github.com/bitbouncer/grok.git /usr/src/libgrok \
+    && git clone --depth=1 https://git.dgit.debian.org/grok.git /usr/src/libgrok \
     && cd /usr/src/libgrok \
     && patch -p0 < /tmp/grok-re-buf-overflow-fix.diff \
     && patch -p0 < /tmp/grok-ipv6.diff \
     && patch -p0 < /tmp/grok-log-levels.diff \
     && patch -p1 < /tmp/grok-missing-semicolon-in-grammar-file.diff \
     && LDFLAGS=-lportablexdr make -j$(getconf _NPROCESSORS_ONLN) \
-    && make install \
+    && PREFIX=/usr/local make install \
     #
     && git clone -b ${CIVETWEB_VERSION} --single-branch --depth 1 https://github.com/civetweb/civetweb.git /usr/src/civetweb \
     && cd /usr/src/civetweb \
@@ -229,7 +229,7 @@ RUN set -eux \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
-FROM alpine:3.12
+FROM alpine:3.15
 
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
