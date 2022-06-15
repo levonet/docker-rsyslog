@@ -55,3 +55,4 @@ jobs:
         username: ${{ env.DOCKERHUB_USERNAME }}
         password: ${{ secrets.DOCKERHUB_PASSWORD }}
         repository: levonet/rsyslog
+        short-description: ${{ github.event.repository.description }}
