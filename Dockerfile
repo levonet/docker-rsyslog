@@ -2,9 +2,9 @@ FROM alpine:3.15 AS build
 
 COPY grok-*.diff /tmp/
 
-ENV RSYSLOG_VERSION v8.2206.0
+ENV RSYSLOG_VERSION v8.2208.0
 # https://github.com/mongodb/mongo-c-driver
-ENV LIBMONGOC_VERSION 1.21.2
+ENV LIBMONGOC_VERSION 1.22.1
 # https://github.com/rsyslog/liblognorm
 ENV LIBLOGNORM_VERSION v2.0.6
 # https://github.com/rsyslog/librelp
