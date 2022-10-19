@@ -1,4 +1,4 @@
-FROM alpine:3.15 AS build
+FROM alpine:3.16 AS build
 
 COPY grok-*.diff /tmp/
 
@@ -229,7 +229,7 @@ RUN set -eux \
     && strip /usr/local/lib/rsyslog/*.so \
     && rm -rf /usr/local/lib/*.a /usr/local/lib/*.la /usr/local/lib/rsyslog/*.la /usr/local/lib/cmake /usr/local/lib/pkgconfig
 
-FROM alpine:3.15
+FROM alpine:3.16
 
 COPY --from=build /usr/local/bin /usr/local/bin
 COPY --from=build /usr/local/sbin/rsyslogd /usr/local/sbin/rsyslogd
