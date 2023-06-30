@@ -1,0 +1,32 @@
+#  docker build -t tmlake/rsyslog .
+#  docker tag tmlake/rsyslog tmlake/rsyslog:v8.2208.0
+#  docker save -o rsyslog-v8.2208.0.tar.gz tmlake/rsyslog:v8.2208.0
+version: '3.3'
+services:
+  rsyslog:
+    container_name: rsyslog
+    image: tmlake/rsyslog:v8.2208.0
+    restart: always
+    hostname: rsyslog
+    labels:
+      - "com.docker.compose.project=rsyslog"
+    ports:
+      - 5140:5140/udp
+      - 5143:5143/udp
+      - 5141:5141/udp
+      - 5142:5142/udp
+      - 5144:5144/udp
+      - 5145:5145/udp
+      - 519:519/tcp
+    networks:
+      - rsyslog_default
+    volumes:
+      - /opt/app/rsyslog/conf/rsyslog.d:/etc/rsyslog.d
+      - /opt/app/rsyslog/logs:/var/log/syslog
+      - /etc/localtime:/etc/localtime:ro
+    environment:
+      SET_CONTAINER_TIME: "true"
+      CONTAINER_TIMEZONE: Asia/Shanghai
+
+networks:
+  rsyslog_default:
