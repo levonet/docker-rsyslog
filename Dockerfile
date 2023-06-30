@@ -264,9 +264,11 @@ RUN set -eux \
 
 COPY rsyslog.conf /etc/rsyslog.conf
 
-ENV TZ=UTC
-EXPOSE 514/tcp
-EXPOSE 514/udp
+ENV TZ=Asia/Shanghai
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+
+EXPOSE 514/tcp 514/udp 519/tcp 5140/udp 5141/udp 5142/udp 5143/udp 5144/udp 5145/udp
+
 STOPSIGNAL SIGTERM
 
 ENTRYPOINT ["/usr/local/sbin/rsyslogd", "-n", "-f", "/etc/rsyslog.conf"]
